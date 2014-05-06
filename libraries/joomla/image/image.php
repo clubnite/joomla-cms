@@ -231,7 +231,7 @@ class JImage
 			// @codeCoverageIgnoreEnd
 		}
 		
-		return (int) $info[0] - (int) $info[1]
+		return (int) $info[0] - (int) $info[1];
 	}
 
 	/**
