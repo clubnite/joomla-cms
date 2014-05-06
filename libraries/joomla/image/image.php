@@ -167,29 +167,10 @@ class JImage
 	 * @return  boolean
 	 *
 	 * @since   11.3
-	 * @throws  InvalidArgumentException
-	 * @throws  RuntimeException
 	 */
 	public static function isCubic($path)
 	{
-		// Make sure the file exists.
-		if (!file_exists($path))
-		{
-			throw new InvalidArgumentException('The image file does not exist.');
-		}
-
-		// Get the image file information.
-		$info = getimagesize($path);
-
-		if (!$info)
-		{
-			// @codeCoverageIgnoreStart
-			throw new RuntimeException('Unable to get properties for the image.');
-
-			// @codeCoverageIgnoreEnd
-		}
-
-		return (int) $info[0] == (int) $info[1];
+		return self::getRatio($path) == 0;
 	}
 
 	/**
@@ -200,29 +181,10 @@ class JImage
 	 * @return  boolean
 	 *
 	 * @since   11.3
-	 * @throws  InvalidArgumentException
-	 * @throws  RuntimeException
 	 */
 	public static function isLandscape($path)
 	{
-		// Make sure the file exists.
-		if (!file_exists($path))
-		{
-			throw new InvalidArgumentException('The image file does not exist.');
-		}
-
-		// Get the image file information.
-		$info = getimagesize($path);
-
-		if (!$info)
-		{
-			// @codeCoverageIgnoreStart
-			throw new RuntimeException('Unable to get properties for the image.');
-
-			// @codeCoverageIgnoreEnd
-		}
-
-		return (int) $info[0] > (int) $info[1];
+		return self::getRatio($path) > 0;
 	}
 
 	/**
@@ -233,10 +195,24 @@ class JImage
 	 * @return  boolean
 	 *
 	 * @since   11.3
+	 */
+	public static function isPortrait($path)
+	{
+		return self::getRatio($path) < 0;
+	}
+
+	/**
+	 * Method to get the difference between height and length.
+	 *
+	 * @param   string  $path  The filesystem path to the image for which to get properties.
+	 *
+	 * @return  int
+	 *
+	 * @since   11.3
 	 * @throws  InvalidArgumentException
 	 * @throws  RuntimeException
 	 */
-	public static function isPortrait($path)
+	protected static function getRatio($path)
 	{
 		// Make sure the file exists.
 		if (!file_exists($path))
@@ -254,8 +230,8 @@ class JImage
 
 			// @codeCoverageIgnoreEnd
 		}
-
-		return (int) $info[0] < (int) $info[1];
+		
+		return (int) $info[0] - (int) $info[1]
 	}
 
 	/**
