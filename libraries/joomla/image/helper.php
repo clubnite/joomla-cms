@@ -51,6 +51,7 @@ abstract class JImageHelper
 	 * @return  stdClass
 	 *
 	 * @since   3.4
+	 *
 	 * @throws  InvalidArgumentException
 	 * @throws  RuntimeException
 	 */
@@ -125,10 +126,11 @@ abstract class JImageHelper
 	 * @param   string   $filename  The file name to use when data should be stored.
 	 * @param   string   $filepath  The file path to use when data should be stored. Note, this must be an absolute system path.
 	 *
-	 * @return	boolean
+	 * @return   boolean
 	 *
 	 * @since   3.4
-	 * @throws	RuntimeException
+	 *
+	 * @throws   RuntimeException
 	 */
 	public static function fromBase64($data, $store = false, $filename = null, $filepath = null)
 	{
