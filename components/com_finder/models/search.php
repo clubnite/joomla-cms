@@ -1068,7 +1068,7 @@ class FinderModelSearch extends JModelList
 		// Get the configuration options.
 		$app = JFactory::getApplication();
 		$input = $app->input;
-		$params = $app->getParams();
+		$params = JComponentHelper::getParams('com_finder');
 		$user = JFactory::getUser();
 		$filter = JFilterInput::getInstance();
 
